@@ -32,7 +32,8 @@ def scan_host(tmp_scanner):
 
 def print_scanner_info(tmp_scanner):
     show_exploits(tmp_scanner)
-    info_obj = tmp_scanner[int(input("select the scanner you want to know more about"))]
+    selected_scanner = int(input("select the scanner you want to know more about"))
+    info_obj = tmp_scanner[selected_scanner]
 
     # use the input to gather the scanner module
     module = client.modules.use('auxiliary', info_obj)
@@ -46,7 +47,7 @@ def print_scanner_info(tmp_scanner):
         print(f"Description: {option_info['description']}")
         print(f"Default Value: {option_info['default']}")
         print("---")
-        
+
         
 
 program_running = ""
