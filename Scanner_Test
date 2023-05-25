@@ -36,3 +36,17 @@ target_ip = input('Enter the IP address of the target: ')
 
 # Perform the vulnerability scan
 perform_scan(target_ip)
+
+
+
+
+Enter the IP address of the target: 10.254.6.15
+Traceback (most recent call last):
+  File "/home/kali/Documents/red_team/red_team.py", line 38, in <module>
+    perform_scan(target_ip)
+  File "/home/kali/Documents/red_team/red_team.py", line 25, in perform_scan
+    scan_results = module['SESSIONS']
+                   ~~~~~~^^^^^^^^^^^^
+  File "/home/kali/Documents/red_team/lib/python3.11/site-packages/pymetasploit3/msfrpc.py", line 1348, in __getitem__
+    raise KeyError("Invalid option '%s'." % item)
+KeyError: "Invalid option 'SESSIONS'."
