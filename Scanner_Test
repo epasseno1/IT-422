@@ -18,15 +18,13 @@ def perform_scan(target):
         module = client.modules.use('auxiliary', scanner_module)
         module['RHOSTS'] = target
 
-        # Run the scan
-        module.execute()
+        # Retrieve the module information
+        module_info = module.info()
 
-        # Check the scan results
-        scan_results = module['SESSIONS']
-        if scan_results:
-            print(f'Target {target} is vulnerable to DoublePulsar SMB exploit.')
-        else:
-            print(f'Target {target} is not vulnerable to DoublePulsar SMB exploit.')
+        # Print the available options
+        print("Available Options:")
+        for option_name, option_info in module_info['options'].items():
+            print(f"{option_name}: {option_info['value']} - {option_info['description']}")
 
     except MsfRpcException as e:
         print(f'Error occurred: {str(e)}')
@@ -36,7 +34,6 @@ target_ip = input('Enter the IP address of the target: ')
 
 # Perform the vulnerability scan
 perform_scan(target_ip)
-
 
 
 
