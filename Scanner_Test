@@ -1,0 +1,38 @@
+from pymetasploit3 import *
+from pymetasploit3.msfrpc import *
+from pymetasploit3.msfconsole import MsfRpcConsole
+
+# Create the RPC session
+client = MsfRpcClient(host='127.0.0.1', port=55552, username='msf', password='OIVBfGV9')
+
+# Launch the scanner module
+console = MsfRpcConsole(client)
+
+# Define the scanner module
+scanner_module = 'auxiliary/scanner/smb/smb_ms17_010'
+
+# Function to perform the vulnerability scan
+def perform_scan(target):
+    try:
+        # Use the scanner module
+        module = client.modules.use('auxiliary', scanner_module)
+        module['RHOSTS'] = target
+
+        # Run the scan
+        module.execute()
+
+        # Check the scan results
+        scan_results = module['SESSIONS']
+        if scan_results:
+            print(f'Target {target} is vulnerable to DoublePulsar SMB exploit.')
+        else:
+            print(f'Target {target} is not vulnerable to DoublePulsar SMB exploit.')
+
+    except MsfRpcException as e:
+        print(f'Error occurred: {str(e)}')
+
+# Get the target IP from user input
+target_ip = input('Enter the IP address of the target: ')
+
+# Perform the vulnerability scan
+perform_scan(target_ip)
