@@ -1,0 +1,19 @@
+@echo off
+
+REM Enable Remote Desktop for Administrator account
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
+
+REM Allow Administrators group remote access
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fAllowToGetHelp /t REG_DWORD /d 1 /f
+
+REM Set Remote Desktop licensing mode to Per Device
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\RCM" /v fDenyTSConnections /t REG_DWORD /d 0 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\RCM" /v "Licensing Core" /t REG_DWORD /d 1 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\RCM" /v "EnableConcurrentSessions" /t REG_DWORD /d 0 /f
+
+REM Restart the Terminal Services service
+net stop "TermService" && net start "TermService"
+
+echo Remote Desktop access has been enabled for Administrator account.
+
+pause
