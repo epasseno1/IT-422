@@ -1,10 +1,10 @@
 net user administrator /active:yes 
 
-Net user administrator Kee9Usindapc 
+Net user administrator 
 
 Net localgroup “Remote Desktop Users” Administrator /add 
 
-net user group4 St@yA1ive!! /add 
+net user group4 /add 
 
 netsh firewall reset 
 
